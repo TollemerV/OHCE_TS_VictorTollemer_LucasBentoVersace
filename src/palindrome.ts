@@ -1,17 +1,23 @@
 import * as os from "os";
 import { Formules } from "./expressions";
+import { LangueInterface } from "./langue.interface";
 
 export class AnalyseurPalindrome {
+    private readonly _langue: LangueInterface;
 
-    public static ExaminerPalindrome(texte: string): string {
+    constructor(langue: LangueInterface) {
+        this._langue = langue;
+    }
+
+    public static ExaminerPalindrome(texte: string,langue:LangueInterface): string {
 
         let inverse = texte.split('').reverse().join('');
 
-        let reponse = `${Formules.BONJOUR}${os.EOL}${inverse}${os.EOL}`;
+        let response = `${langue.DireBonjour()}${os.EOL}${inverse}${os.EOL}`;
 
         if (inverse === texte)
-            reponse += `${Formules.BIEN_DIT}${os.EOL}`;
+            response += `${langue.Feliciter()}${os.EOL}`;
 
-        return reponse + Formules.AU_REVOIR;
+        return response + langue.DireAuRevoir();
     }
 }
