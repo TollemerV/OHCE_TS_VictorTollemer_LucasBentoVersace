@@ -18,7 +18,7 @@ export class AnalyseurPalindromeBuilder {
     }
 
     public DefinirLangue(langue: LangueInterface): AnalyseurPalindromeBuilder {
-        this._langue = this._langue;
+        this._langue = langue;
         return this;
     }
 }
