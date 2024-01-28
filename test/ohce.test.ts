@@ -2,11 +2,13 @@ import { AnalyseurPalindrome } from "../src/palindrome";
 import * as os from "os";
 import { Francais } from "../src/langue.français";
 import { Anglais } from "../src/langue.anglais";
+import { LangueFake } from "./utilities/langue.fake"; 
 
 const symetrique = 'kayak';
 const nonSymetriques = ['exemple', 'test'];
 const langueFrancaise = new Francais();
 const langueAnglaise = new Anglais();
+const langueFake = new LangueFake();
 
 describe("Tests de symétrie", () => {
     test.each([...nonSymetriques])("QUAND on saisit un non-palindrome ALORS elle est renvoyée en miroir",
@@ -62,4 +64,17 @@ describe("Tests de symétrie", () => {
             let derniereLigne = lignes[lignes.length - 1];
             expect(derniereLigne).toEqual(langueAnglaise.DireAuRevoir());
         });
+
+        test.each([...nonSymetriques, symetrique])(
+            'LangueFake :  "Bonjour Fake" est envoyé en premier et "Au Revoir Fake" en dernier',
+            (texte: string) => {
+                let resultat = AnalyseurPalindrome.ExaminerPalindrome(texte, langueFake);
+    
+                let premiereLigne = resultat.split(os.EOL)[0];
+                expect(premiereLigne).toEqual(langueFake.DireBonjour());
+    
+                let lignes = resultat.split(os.EOL);
+                let derniereLigne = lignes[lignes.length - 1];
+                expect(derniereLigne).toEqual(langueFake.DireAuRevoir());
+            });
 });
