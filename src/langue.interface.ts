@@ -1,5 +1,6 @@
+import { DayTime } from "./momentdelajournee";
 export interface LangueInterface {
     Feliciter(): string;
-    DireBonjour(): string;
+    DireBonjour(time:DayTime): string;
     DireAuRevoir(): string;
 }
