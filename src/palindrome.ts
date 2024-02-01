@@ -12,15 +12,15 @@ export class AnalyseurPalindrome {
         this._dayTime = dayTime;
     }
 
-    public static ExaminerPalindrome(texte: string,langue:LangueInterface, dayTime:DayTime): string {
+    public ExaminerPalindrome(texte: string): string {
 
         let inverse = texte.split('').reverse().join('');
 
-        let response = `${langue.DireBonjour(dayTime)}${os.EOL}${inverse}${os.EOL}`;
+        let response = `${this._langue.DireBonjour(this._dayTime)}${os.EOL}${inverse}${os.EOL}`;
 
         if (inverse === texte)
-            response += `${langue.Feliciter()}${os.EOL}`;
+            response += `${this._langue.Feliciter()}${os.EOL}`;
 
-        return response + langue.DireAuRevoir();
+        return response + this._langue.DireAuRevoir();
     }
 }
