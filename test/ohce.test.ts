@@ -101,7 +101,43 @@ describe("Tests de symétrie", () => {
             expect(firstLine).toEqual(value);
         }
     );
+})
+
+
+// Gestion des entrées inattendues : Chaine vide, caractères spéciaux, entrée null, etc.
+describe("Gestion des entrées inattendues", () => {
+    const langue = new LangueFake();
+    const analyseur = new AnalyseurPalindromeBuilder()
+                        .DefineLangue(langue)
+                        .ThisTime(DayTime.Unknown) 
+                        .Build();
+
+    test("Chaîne vide", () => {
+        const resultat = analyseur.ExaminerPalindrome("");
+        expect(resultat).toContain(langue.DireBonjour(DayTime.Unknown));
+        expect(resultat).not.toContain("Félicitations Fake"); 
+    });
+
+
+    test("Caractères spéciaux", () => {
+        const texte = "!@#$%^&*()";
+        const resultat = analyseur.ExaminerPalindrome(texte);
+        expect(resultat).toContain(texte.split('').reverse().join(''));
+    });
+
+    test("Entrée null", () => {
+        const resultat = analyseur.ExaminerPalindrome(null as unknown as string);
+        expect(resultat).toContain(langue.DireAuRevoir());
+    });
+
+    test("Entrée undefined", () => {
+        const resultat = analyseur.ExaminerPalindrome(undefined as unknown as string);
+        expect(resultat).toContain(langue.DireAuRevoir());
+    }
+    );
 });
+
+
 
         
    /*  test("QUAND on saisit un palindrome en français ALORS celui-ci est renvoyé ET 'Bien dit !' est envoyé ensuite", () => {

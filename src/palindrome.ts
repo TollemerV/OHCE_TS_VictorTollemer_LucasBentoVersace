@@ -13,14 +13,26 @@ export class AnalyseurPalindrome {
     }
 
     public ExaminerPalindrome(texte: string): string {
+        let response = "";
+    
 
-        let inverse = texte.split('').reverse().join('');
-
-        let response = `${this._langue.DireBonjour(this._dayTime)}${os.EOL}${inverse}${os.EOL}`;
-
-        if (inverse === texte)
-            response += `${this._langue.Feliciter()}${os.EOL}`;
-
-        return response + this._langue.DireAuRevoir();
+        response += `${this._langue.DireBonjour(this._dayTime)}${os.EOL}`;
+    
+        if (texte) { 
+            // Si le texte n'est pas vide, null ou undefined
+            let inverse = texte.split('').reverse().join('');
+    
+            response += `${inverse}${os.EOL}`;
+    
+            if (inverse === texte) {
+                response += `${this._langue.Feliciter()}${os.EOL}`;
+            }
+        }
+    
+        response += this._langue.DireAuRevoir();
+    
+        return response;
     }
 }
+
+
